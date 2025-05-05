@@ -1,5 +1,5 @@
 import { Button } from "@/components/ui/button";
-import { ArrowRightIcon } from "lucide-react";
+import { IconArrowRight } from "@tabler/icons-react";
 import Image from "next/image";
 
 export default function Home() {
@@ -36,7 +36,7 @@ export default function Home() {
           >
             Read our docs
           </a>
-          <Button icon={ArrowRightIcon} iconPlacement="right" effect={"shine"}>
+          <Button icon={IconArrowRight} iconPlacement="right" effect={"shine"}>
             test
           </Button>
         </div>

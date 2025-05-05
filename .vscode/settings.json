@@ -12,5 +12,8 @@
   },
 
   "typescript.preferences.autoImportSpecifierExcludeRegexes": ["@radix-ui", "next/router"],
-  "tailwindCSS.experimental.classRegex": ["tw`([^`*])"]
+  "tailwindCSS.experimental.classRegex": ["tw([^`]*)"],
+  "[html]": {
+    "editor.defaultFormatter": "esbenp.prettier-vscode"
+  }
 }
