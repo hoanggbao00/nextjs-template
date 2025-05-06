@@ -1,6 +1,6 @@
 import { ThemeProvider } from "@/components/providers/theme-provider";
 import { Toaster } from "@/components/ui/sonner";
-import { OpenGraph } from "@/lib/og";
+import { OpenGraph } from "@/lib/open-graph";
 import type { Metadata } from "next";
 import { Geist_Mono, Inter } from "next/font/google";
 import NextTopLoader from "nextjs-toploader";

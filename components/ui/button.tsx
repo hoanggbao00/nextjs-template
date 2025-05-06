@@ -1,5 +1,6 @@
 import { cn } from "@/lib/utils";
 import { Slot, Slottable } from "@radix-ui/react-slot";
+import { IconLoader2 } from "@tabler/icons-react";
 import { type VariantProps, cva } from "class-variance-authority";
 import type * as React from "react";
 
@@ -50,11 +51,13 @@ const buttonVariants = cva(
 interface IconProps {
   icon: React.ElementType;
   iconPlacement: "left" | "right";
+  iconAttributes?: React.ComponentProps<"svg">;
 }
 
 interface IconRefProps {
   icon?: never;
   iconPlacement?: undefined;
+  iconAttributes?: never;
 }
 
 export type ButtonIconProps = IconProps | IconRefProps;
@@ -68,34 +71,45 @@ function Button({
   iconPlacement,
   effect,
   children,
+  loading,
+  disabled,
+  iconAttributes,
   ...props
 }: React.ComponentProps<"button"> &
   VariantProps<typeof buttonVariants> &
   ButtonIconProps & {
     asChild?: boolean;
+    loading?: boolean;
   }) {
   const Comp = asChild ? Slot : "button";
 
   return (
-    <Comp className={cn(buttonVariants({ variant, effect, size, className }))} {...props}>
-      {Icon &&
+    <Comp
+      className={cn(buttonVariants({ variant, effect, size, className }))}
+      {...props}
+      disabled={disabled || loading}
+    >
+      {loading && <IconLoader2 className="animate-spin" />}
+      {!loading &&
+        Icon &&
         iconPlacement === "left" &&
         (effect === "expandIcon" ? (
           <div className="w-0 translate-x-[0%] pr-0 opacity-0 transition-all duration-200 group-hover:w-5 group-hover:translate-x-0 group-hover:pr-2 group-hover:opacity-100">
-            <Icon />
+            <Icon {...iconAttributes} />
           </div>
         ) : (
-          <Icon />
+          <Icon {...iconAttributes} />
         ))}
       <Slottable>{children}</Slottable>
-      {Icon &&
+      {!loading &&
+        Icon &&
         iconPlacement === "right" &&
         (effect === "expandIcon" ? (
           <div className="w-0 translate-x-[100%] pl-0 opacity-0 transition-all duration-200 group-hover:w-5 group-hover:translate-x-0 group-hover:pl-2 group-hover:opacity-100">
-            <Icon />
+            <Icon {...iconAttributes} />
           </div>
         ) : (
-          <Icon />
+          <Icon {...iconAttributes} />
         ))}
     </Comp>
   );
